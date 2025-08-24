@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hovera - The Movie Title</title>
+    <style>
+        :root {
+            --bg-2: #1a1a2e; /* Dark background color for the loader and movie title */
+            --brand: #6a44ff;
+            --accent: #ff4d94;
+            --brand-2: #4dffff;
+            --cyan: #4dffff;
+            --pink: #ff4d94;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-2);
+            color: #eee;
+            overflow: hidden; /* Prevent scrollbars during full-screen effects */
+        }
+
+        /* -------------------- Loader Styles (Updated) -------------------- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: radial-gradient(600px 400px at 70% 20%, rgba(123,97,255,.15), transparent 60%), var(--bg-2);
+            display: grid;
+            place-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loader-wrap {
+            display: grid;
+            place-items: center;
+        }
+        
+        .loader-wrap .logo {
+            width: 150px;
+            height: auto;
+            animation: pulse-glow 5s infinite ease-in-out;
+        }
+        
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        /* ----------------------------------------------------------------------------- */
+        
+        /* -------------------- New Styles for Movie Title Reveal -------------------- */
+        .main-content {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-2);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .main-content.visible {
+            display: flex;
+        }
+
+        .main-content .logo-container {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInUp 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .main-content .logo-img {
+            max-width: 500px;
+            width: 80vw;
+            height: auto;
+            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
+        }
+
+        .main-content .tagline {
+            opacity: 0;
+            font-size: clamp(1em, 2vw, 2em);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ccc;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 2s; /* Delayed to appear after the logo */
+        }
+
+        /* -------------------- Keyframe animations -------------------- */
+        @keyframes pulse-glow {
+            0% { filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); }
+            100% { filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4)); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-wrap">
+            <img class="logo" src="C:\Users\Admin\Downloads\ChatGPT Image Aug 14, 2025, 03_06_46 PM.png" alt="Hovera Logo">
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="logo-container">
+            <img class="logo-img" src="C:\Users\Admin\Downloads\ChatGPT Image Aug 14, 2025, 03_06_46 PM.png" alt="Hovera Logo">
+        </div>
+        <div class="tagline">Your Social Media Story Begins</div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            const mainContent = document.querySelector('.main-content');
+
+            // Set a timeout to simulate loading time
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                
+                // After the loader is hidden, show the main content
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                }, 800); // Wait for the loader's fade-out transition to complete (0.8s)
+            }, 3000); // Loader displays for 3 seconds
+        });
+    </script>
+
+</body>
+</html>
